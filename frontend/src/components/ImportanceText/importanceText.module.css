@@ -1,0 +1,20 @@
+.importance-text {
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* High importance: Red text */
+.importance-high {
+    color: red;
+}
+
+/* Medium importance: Orange text */
+.importance-medium {
+    color: orange;
+}
+
+/* Low importance: Yellow text */
+.importance-low {
+    color: yellow;
+}

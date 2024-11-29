@@ -1,0 +1,46 @@
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+}
+
+.taskName {
+    flex: 2;
+    text-align: left;
+}
+
+.taskImportance {
+    flex: 1;
+    text-align: center;
+}
+
+.taskDeadline {
+    flex: 1.5;
+    text-align: center;
+}
+
+.taskIsDone {
+    flex: 1;
+    text-align: center;
+}
+
+.taskDeleteBtn {
+    flex: 0.5;
+    background-color: #4e2024;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.taskDeleteBtn:hover {
+    background-color: #e72929;
+}
