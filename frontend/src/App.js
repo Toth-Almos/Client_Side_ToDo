@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './app.css';
 import TaskList from './components/TaskList/TaskList';
 import Header from './components/Header/Header';
 import TaskForm from './components/TaskForm/TaskForm';
 
 function App() {
-  const [tasks, setTasks] = useState([
-    { id: 1, name: 'Finish React project', deadline: '2024-12-01', importance: 'High', is_done: false },
-    { id: 2, name: 'Study for exams', deadline: '2024-12-05', importance: 'Medium', is_done: true },
-  ]);
+  //Store and load tasks from localStorage
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
 
+  //Save tasks to localStorage whenever tasks change:
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  //Delete a task by id:
   const deleteTask = (id) => {
     setTasks(tasks.filter(task => task.id !== id));
   };
 
+  //Add a new task:
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
   };

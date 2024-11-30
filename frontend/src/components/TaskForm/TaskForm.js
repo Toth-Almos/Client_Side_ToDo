@@ -17,10 +17,22 @@ export default function TaskForm({ onAddTask }) {
         e.preventDefault();
 
         // Validate required fields
-        if (!formData.name || !formData.deadline) {
-            alert('Please fill out the name and deadline fields.');
+        if (!formData.name.trim()) {
+            alert('Task name is required.');
             return;
         }
+        if (!formData.deadline) {
+            alert('Deadline is required.');
+            return;
+        }
+
+        // Optional: Validate deadline to ensure it's not a past date
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        if (formData.deadline < today) {
+            alert('Deadline cannot be in the past.');
+            return;
+        }
+
 
         // Create the new task
         const newTask = {
