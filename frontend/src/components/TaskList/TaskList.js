@@ -2,7 +2,7 @@ import React from 'react';
 import TaskItem from '../TaskItem/TaskItem';
 import styles from './taskList.module.css';
 
-export default function TaskList({ tasks, onDelete }) {
+export default function TaskList({ tasks, onDelete, onToggle }) {
     if (tasks.length === 0) {
         return <p className={styles.tasklistEmpty}>No tasks available.</p>;
     }
@@ -10,7 +10,7 @@ export default function TaskList({ tasks, onDelete }) {
     return (
         <ul className={styles.tasklistContainer}>
             {tasks.map((task) => (
-                <TaskItem key={task.id} task={task} onDelete={onDelete} />
+                <TaskItem key={task.id} task={task} onDelete={onDelete} onToggle={onToggle} />
             ))}
         </ul>
     );

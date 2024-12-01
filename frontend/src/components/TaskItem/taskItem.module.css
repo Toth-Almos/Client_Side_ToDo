@@ -10,9 +10,18 @@
     font-size: 1rem;
 }
 
+.taskCompleted {
+    opacity: 0.5;
+    color: #6c757d;
+}
+
 .taskName {
     flex: 2;
     text-align: left;
+}
+
+.taskNameCompleted {
+    text-decoration: line-through;
 }
 
 .taskImportance {
@@ -28,6 +37,12 @@
 .taskIsDone {
     flex: 1;
     text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.taskIsDone:hover {
+    color: #e72929;
 }
 
 .taskDeleteBtn {

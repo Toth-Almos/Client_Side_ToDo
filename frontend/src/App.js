@@ -23,6 +23,17 @@ function App() {
     setTasks([...tasks, newTask]);
   };
 
+  // Toggle task status (is_done)
+  const toggleTaskStatus = (id) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) =>
+        task.id === id ? { ...task, is_done: !task.is_done } : task
+      );
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Save to localStorage
+      return updatedTasks;
+    });
+  };
+
   return (
     <>
       <Header />
@@ -31,7 +42,7 @@ function App() {
           <TaskForm onAddTask={addTask} />
         </div>
         <h1>Task List</h1>
-        <TaskList tasks={tasks} onDelete={deleteTask} />
+        <TaskList tasks={tasks} onDelete={deleteTask} onToggle={toggleTaskStatus} />
       </div>
     </>
   );
