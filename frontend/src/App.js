@@ -3,10 +3,14 @@ import './app.css';
 import TaskList from './components/TaskList/TaskList';
 import Header from './components/Header/Header';
 import TaskForm from './components/TaskForm/TaskForm';
+import TaskEditForm from './components/TaskEditForm/TaskEditForm';
 
 function App() {
   //Store and load tasks from localStorage
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
+  //for the edit window:
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
 
   //Save tasks to localStorage whenever tasks change:
   useEffect(() => {
@@ -34,6 +38,27 @@ function App() {
     });
   };
 
+  //Open edit window:
+  const openEditForm = (task) => {
+    setEditingTask(task);
+    setIsEditing(true);
+  };
+
+  //Close edit window:
+  const closeEditForm = () => {
+    setIsEditing(false);
+    setEditingTask(null);
+  };
+
+  const updateTask = (updatedTask) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === updatedTask.id ? updatedTask : task
+      )
+    );
+    closeEditForm(); // Close the window after editing
+  };
+
   return (
     <>
       <Header />
@@ -42,8 +67,13 @@ function App() {
           <TaskForm onAddTask={addTask} />
         </div>
         <h1>Task List</h1>
-        <TaskList tasks={tasks} onDelete={deleteTask} onToggle={toggleTaskStatus} />
+        <TaskList tasks={tasks} onDelete={deleteTask} onToggle={toggleTaskStatus} onEdit={openEditForm} />
       </div>
+
+      {isEditing && (
+        <TaskEditForm task={editingTask} onClose={closeEditForm} onSave={updateTask} />
+      )}
+
     </>
   );
 }

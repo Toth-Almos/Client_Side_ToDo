@@ -19,7 +19,11 @@ export default function TaskItem({ task, onToggle, onDelete, onEdit }) {
                 {/*text changes depending on Task is_done attribute:*/}
                 <span className={styles.taskIsDone} onClick={handleToggleStatus}>{is_done ? 'Finished' : 'Pending'}</span>
 
-                <button className={styles.taskDeleteBtn} onClick={() => onDelete(id)}>
+                <button className={styles.taskEditBtn} onClick={() => onEdit(task)} disabled={is_done}>
+                    Edit
+                </button>
+
+                <button className={styles.taskDeleteBtn} onClick={() => onDelete(id)} disabled={is_done}>
                     Delete
                 </button>
             </li>

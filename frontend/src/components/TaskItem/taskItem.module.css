@@ -16,7 +16,7 @@
 }
 
 .taskName {
-    flex: 2;
+    flex: 3;
     text-align: left;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .taskDeadline {
-    flex: 1.5;
+    flex: 1;
     text-align: center;
 }
 
@@ -43,6 +43,7 @@
 
 .taskIsDone:hover {
     color: #e72929;
+    opacity: 1;
 }
 
 .taskDeleteBtn {
@@ -56,6 +57,25 @@
     cursor: pointer;
 }
 
+.taskEditBtn {
+    flex: 0.5;
+    background-color: #4e2024;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.taskEditBtn:hover,
 .taskDeleteBtn:hover {
     background-color: #e72929;
+}
+
+.taskEditBtn:disabled,
+.taskDeleteBtn:disabled {
+    cursor: not-allowed;
+    background-color: #4e2024;
 }
