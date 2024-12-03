@@ -41,7 +41,8 @@ export default function Statistics({ tasks }) {
         const total = tasks.length;
         const completed = tasks.filter((task) => task.is_done).length;
         const pending = total - completed;
-        return { total, completed, pending };
+        const completionRate = (completed / total) * 100;
+        return { total, completed, pending, completionRate };
     };
 
     //State to manage the granularity view (overall, yearly, monthly, or daily):
@@ -82,7 +83,7 @@ export default function Statistics({ tasks }) {
             <div className={styles.statsDisplay}>
                 {/*Get a [key, tasks] pair for every group:*/}
                 {Object.entries(groupedTasks).map(([key, tasks]) => {
-                    const { total, completed, pending } = calculateStats(tasks);
+                    const { total, completed, pending, completionRate } = calculateStats(tasks);
                     return (
                         <div key={key} className={styles.statBox}>
                             <h3>
@@ -97,6 +98,7 @@ export default function Statistics({ tasks }) {
                             <p><strong>Total Tasks:</strong> {total}</p>
                             <p><strong>Completed Tasks:</strong> {completed}</p>
                             <p><strong>Pending Tasks:</strong> {pending}</p>
+                            <p><strong>Completion Rate :</strong> {completionRate}%</p>
                         </div>
                     );
                 })}

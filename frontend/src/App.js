@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import TaskForm from './components/TaskForm/TaskForm';
 import TaskEditForm from './components/TaskEditForm/TaskEditForm';
 import Statistics from './Pages/Statistics/Statistics';
+import FinishedTaskList from './components/FinishedTaskList/FinishedTaskList';
 
 function App() {
   //Store and load tasks from localStorage
@@ -74,8 +75,8 @@ function App() {
                 <div className='form-container'>
                   <TaskForm onAddTask={addTask} />
                 </div>
-                <h1>Task List</h1>
                 <TaskList tasks={tasks} onDelete={deleteTask} onToggle={toggleTaskStatus} onEdit={openEditForm} />
+                <FinishedTaskList tasks={tasks} onToggle={toggleTaskStatus} />
               </>
             }
           />
