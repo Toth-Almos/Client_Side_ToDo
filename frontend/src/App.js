@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './app.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TaskList from './components/TaskList/TaskList';
 import Header from './components/Header/Header';
 import TaskForm from './components/TaskForm/TaskForm';
 import TaskEditForm from './components/TaskEditForm/TaskEditForm';
+import Statistics from './Pages/Statistics/Statistics';
 
 function App() {
   //Store and load tasks from localStorage
@@ -60,21 +62,32 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       <Header />
       <div className='body-container'>
-        <div className='form-container'>
-          <TaskForm onAddTask={addTask} />
-        </div>
-        <h1>Task List</h1>
-        <TaskList tasks={tasks} onDelete={deleteTask} onToggle={toggleTaskStatus} onEdit={openEditForm} />
+        <Routes>
+          {/* Main task list page */}
+          <Route
+            path="/"
+            element={
+              <>
+                <div className='form-container'>
+                  <TaskForm onAddTask={addTask} />
+                </div>
+                <h1>Task List</h1>
+                <TaskList tasks={tasks} onDelete={deleteTask} onToggle={toggleTaskStatus} onEdit={openEditForm} />
+              </>
+            }
+          />
+          {/* Statistics page */}
+          <Route path="/statistics" element={<Statistics tasks={tasks} />} />
+        </Routes>
+
+        {isEditing && (
+          <TaskEditForm task={editingTask} onClose={closeEditForm} onSave={updateTask} />
+        )}
       </div>
-
-      {isEditing && (
-        <TaskEditForm task={editingTask} onClose={closeEditForm} onSave={updateTask} />
-      )}
-
-    </>
+    </Router>
   );
 }
 

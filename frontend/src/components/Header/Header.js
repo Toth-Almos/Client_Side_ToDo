@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './header.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
 
@@ -13,12 +14,12 @@ export default function Header() {
                     <ul>
                         <li className={styles.menu_container}>
                             <div>
-                                <a href='./'>Your List</a>
+                                <Link to="/">Your List</Link>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <a href='./'>Statistics</a>
+                                <Link to="/statistics">Statistics</Link>
                             </div>
                         </li>
                     </ul>
