@@ -6,6 +6,7 @@ import styles from './taskItem.module.css';
 export default function TaskItem({ task, onToggle, onDelete, onEdit }) {
     const { id, name, deadline, importance, is_done } = task;
 
+    // Changing the is_done attribute/status when user clicks on the status text:
     const handleToggleStatus = () => {
         onToggle(id);   //call the toggle function passed as a prop
     }

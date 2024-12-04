@@ -8,7 +8,7 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.container}>
                 <div to='/' className={styles.logo}>
-                    LOGO
+                    To-Do App
                 </div>
                 <nav>
                     <ul>

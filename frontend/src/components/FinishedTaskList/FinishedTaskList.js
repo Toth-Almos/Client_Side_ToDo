@@ -3,9 +3,9 @@ import TaskItem from '../TaskItem/TaskItem';
 import styles from './finishedTaskList.module.css';
 
 export default function FinishedTaskList({ tasks, onToggle }) {
-    //Filter only the tasks that are finished
+    // Filter only the tasks that are finished
     const finishedTasks = tasks.filter(task => task.is_done);
-    //Check if there are no tasks:
+    // Check if there are no tasks:
     if (finishedTasks.length === 0) {
         return <p className={styles.finishedTaskListEmpty}>No finished tasks available.</p>;
     }

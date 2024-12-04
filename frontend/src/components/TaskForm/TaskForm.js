@@ -8,11 +8,13 @@ export default function TaskForm({ onAddTask }) {
         deadline: '',       // Empty string for no deadline initially
     });
 
+    // Any changes are reflected on the formData:
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    // Function for validation and adding the new Task:
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -26,7 +28,7 @@ export default function TaskForm({ onAddTask }) {
             return;
         }
 
-        // Optional: Validate deadline to ensure it's not a past date
+        // Validate deadline to ensure it's not a past date
         const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
         if (formData.deadline < today) {
             alert('Deadline cannot be in the past.');

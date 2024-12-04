@@ -9,28 +9,30 @@ import Statistics from './Pages/Statistics/Statistics';
 import FinishedTaskList from './components/FinishedTaskList/FinishedTaskList';
 
 function App() {
-  //Store and load tasks from localStorage
+  // Store and load tasks from localStorage
   const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
-  //for the edit window:
+  // for the edit window:
   const [isEditing, setIsEditing] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
 
-  //Save tasks to localStorage whenever tasks change:
+  // Save tasks to localStorage whenever tasks change:
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  //Delete a task by id:
+  // Delete a task by id:
   const deleteTask = (id) => {
     setTasks(tasks.filter(task => task.id !== id));
+    alert('Task deleted!')
   };
 
-  //Add a new task:
+  // Add a new task:
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
+    alert("New task is added to your list!")
   };
 
-  // Toggle task status (is_done)
+  // Find task by id and change is_done attribute:
   const toggleTaskStatus = (id) => {
     setTasks((prevTasks) => {
       const updatedTasks = prevTasks.map((task) =>
@@ -41,18 +43,19 @@ function App() {
     });
   };
 
-  //Open edit window:
+  // Open edit window:
   const openEditForm = (task) => {
     setEditingTask(task);
     setIsEditing(true);
   };
 
-  //Close edit window:
+  // Close edit window:
   const closeEditForm = () => {
     setIsEditing(false);
     setEditingTask(null);
   };
 
+  // Update the selected task:
   const updateTask = (updatedTask) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -60,6 +63,7 @@ function App() {
       )
     );
     closeEditForm(); // Close the window after editing
+    alert('Changes saved!')
   };
 
   return (

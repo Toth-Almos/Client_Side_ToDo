@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import styles from './taskEditForm.module.css';
 
-export default function TaskEditModal({ task, onClose, onSave }) {
+export default function TaskEditForm({ task, onClose, onSave }) {
+    // The edited task:
     const [formData, setFormData] = useState({ ...task });
 
+    // Any changes on the form fields are reflected on the formData:
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    // Give formData to onSave callback function:
     const handleSave = () => {
         onSave(formData);
     };

@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import styles from './statistics.module.css';
 
 export default function Statistics({ tasks }) {
-    //Helper function to parse the date string into a Date object:
+    // Helper function to parse the date string into a Date object:
     const parseDate = (dateString) => (dateString ? new Date(dateString) : null);
 
-    //Group tasks by year, month, or day:
+    // Group tasks by year, month, or day:
     const groupTasksByDate = (tasks, granularity) => {
         return tasks.reduce((acc, task) => {
             const date = parseDate(task.deadline);
             if (!date) return acc;
 
-            //Set key as a unique identifier for each group by granularity:
+            // Set key as a unique identifier for each group by granularity:
             let key;
             switch (granularity) {
                 case 'year':
-                    key = date.getFullYear(); //Format: YYYY
+                    key = date.getFullYear(); // Format: YYYY
                     break;
                 case 'month':
-                    key = `${date.getFullYear()}-${date.getMonth() + 1}`; //Format: YYYY-MM
+                    key = `${date.getFullYear()}-${date.getMonth() + 1}`; // Format: YYYY-MM
                     break;
                 case 'day':
                     key = date.toISOString().split('T')[0]; // Format:YYYY-MM-DD
@@ -27,16 +27,16 @@ export default function Statistics({ tasks }) {
                     key = 'unknown';
             }
 
-            //create key attribute if it doesn't already exists:
+            // create key attribute if it doesn't already exists:
             if (!acc[key]) acc[key] = [];
-            //Add task for the specific key:
+            // Add task for the specific key:
             acc[key].push(task);
 
             return acc;
         }, {});
     };
 
-    //Calculate statistics for a specific group of tasks:
+    // Calculate statistics for the given tasks:
     const calculateStats = (tasks) => {
         const total = tasks.length;
         const completed = tasks.filter((task) => task.is_done).length;
@@ -45,10 +45,10 @@ export default function Statistics({ tasks }) {
         return { total, completed, pending, completionRate };
     };
 
-    //State to manage the granularity view (overall, yearly, monthly, or daily):
+    // State to manage the granularity view (overall, yearly, monthly, or daily):
     const [granularity, setGranularity] = useState('overall');
 
-    //Grouped tasks based on the selected granularity:
+    // Grouped tasks based on the selected granularity:
     const groupedTasks = granularity === 'overall' ? { Overall: tasks } : groupTasksByDate(tasks, granularity);
 
     return (
@@ -98,7 +98,7 @@ export default function Statistics({ tasks }) {
                             <p><strong>Total Tasks:</strong> {total}</p>
                             <p><strong>Completed Tasks:</strong> {completed}</p>
                             <p><strong>Pending Tasks:</strong> {pending}</p>
-                            <p><strong>Completion Rate :</strong> {completionRate}%</p>
+                            <p><strong>Completion Rate :</strong> {completionRate.toFixed(1)}%</p>
                         </div>
                     );
                 })}
